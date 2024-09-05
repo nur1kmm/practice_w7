@@ -1,31 +1,67 @@
-//Practce 1
+// Practice 1: Array iteration
 let arr = ['Saule', 'Bibigul', 'Erkezhan', 'Madina', 'Nurassyl', 'Nurgazy'];
 
-for(i in arr){
-    console.log(i);
+// Using for...in loop to display indices
+console.log("Practice 1: Array iteration with for...in");
+for(let i in arr){
+    console.log("Index:", i);
 }
 
-for(el of arr){
-    console.log(el);
+// Using for...of loop to display elements
+console.log("Practice 1: Array iteration with for...of");
+for(let el of arr){
+    console.log("Element:", el);
 }
 
-//Practice 2
+// Practice 2: Delete student function
 let arr2 = ['Saule', 'Bibigul', 'Erkezhan', 'Madina', 'Nurassyl', 'Nurgazy'];
 
-function deleteStudent (arr2, student){
-    const index = arr2.indexOf(student);
+/**
+ * Deletes a student from the array
+ * @param {Array} array - The array of students
+ * @param {String} student - The name of the student to delete
+ * @returns {Array} The updated array
+ */
+function deleteStudentFromArray(array, student){
+    const index = array.indexOf(student);
     if(index !== -1){
-        studentArray.splice(index, 1);
+        array.splice(index, 1);
     }
-    return arr2;
+    return array;
 }
 
-//Practice 3
+// Practice 3: DOM interaction for deleting students
 let arr3 = ['Saule','Bibigul','Erkezhan', 'Madina', 'Nurassyl', 'Nurgazy'];
-console.log(arr3);
+console.log("Initial student list:", arr3);
+
 let deleteBtn = document.querySelector(".delete");
 let deleteInput = document.querySelector(".delete-value");
-function deleteStudent(){
-    let student = deleteInput.value;
+
+/**
+ * Handles the deletion of a student based on user input
+ */
+function deleteStudentFromDOM(){
+    let student = deleteInput.value.trim();
+    if(student === "") {
+        alert("Please enter a student name");
+        return;
+    }
+    
+    // Check if student exists before attempting deletion
+    if(arr3.includes(student)) {
+        arr3 = deleteStudentFromArray(arr3, student);
+        console.log(`Deleted student: ${student}`);
+        console.log("Updated student list:", arr3);
+        alert(`Successfully deleted ${student}`);
+    } else {
+        alert(`Student "${student}" not found in the list`);
+    }
+    
+    // Clear the input field
+    deleteInput.value = "";
 }
 
+// Add event listener to button for better practice
+if(deleteBtn) {
+    deleteBtn.addEventListener("click", deleteStudentFromDOM);
+}
