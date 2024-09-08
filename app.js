@@ -34,6 +34,12 @@ function deleteStudentFromArray(array, student){
 let arr3 = ['Saule','Bibigul','Erkezhan', 'Madina', 'Nurassyl', 'Nurgazy'];
 console.log("Initial student list:", arr3);
 
+// Display initial student list in the console
+console.log("Students in the list:");
+arr3.forEach((student, index) => {
+    console.log(`${index + 1}. ${student}`);
+});
+
 let deleteBtn = document.querySelector(".delete");
 let deleteInput = document.querySelector(".delete-value");
 
@@ -64,4 +70,13 @@ function deleteStudentFromDOM(){
 // Add event listener to button for better practice
 if(deleteBtn) {
     deleteBtn.addEventListener("click", deleteStudentFromDOM);
+}
+
+// Also allow deletion by pressing Enter key
+if(deleteInput) {
+    deleteInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            deleteStudentFromDOM();
+        }
+    });
 }
